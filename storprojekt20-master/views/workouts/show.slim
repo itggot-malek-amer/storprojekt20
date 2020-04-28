@@ -1,0 +1,11 @@
+a href="/reg_confirm" back
+
+
+ul
+- show.each do |el|
+    li = el['name'] + "[ sets: #{el['sets'].to_s} reps: #{el['reps'].to_s}]"
+    form action="/#{el['id']}, #{el['program_id']}/delete" method="post"
+        input type="hidden" value="program_id" name="program_id" 
+        button type="submit" value="Ta BORT" TA BORT
+
+

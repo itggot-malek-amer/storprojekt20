@@ -1,0 +1,57 @@
+p HEEEEJ
+
+
+
+- reps=[1,2,3,4,5,6,7,8,9,10] 
+- sets =[1,2,3,4,5]
+
+
+form action="/create_workout" method="post" name="info"
+    
+      
+        input type="text" placeholder="name" name="prog_name"/
+
+        P Select your excersize + sets + reps
+        select  name="moves"
+            -   moves.each do |n|
+                option value="#{n['id']}" = n['name']
+        select name="sets" 
+             -   sets.each do |s|
+                option value="#{s}" = s
+        select name="reps" 
+            -   reps.each do |r|
+                option value="#{r}" = r  
+
+
+        select  name="moves1"
+            -   moves.each do |n|
+                option value="#{n['id']}" = n['name']
+        select name="sets1" 
+             -   sets.each do |s|
+                option value="#{s}" = s
+        select name="reps1" 
+            -   reps.each do |r|
+                option value="#{r}" = r      
+
+
+        select  name="moves2"
+            -   moves.each do |n|
+                option value="#{n['id']}" = n['name']
+        select name="sets2" 
+             -   sets.each do |s|
+                option value="#{s}" = s
+        select name="reps2" 
+            -   reps.each do |r|
+                option value="#{r}" = r  
+
+
+        select  name="moves3"
+            -   moves.each do |n|
+                option value="#{n['id']}" = n['name']
+        select name="sets3" 
+             -   sets.each do |s|
+                option value="#{s}" = s
+        select name="reps3" 
+            -   reps.each do |r|
+                option value="#{r}" = r                   
+        button type="submit" name="save" save
