@@ -7,7 +7,7 @@ enable :sessions
 
 get('/')do
 db = SQLite3::Database.new("db/workouts.db")
-slim(:"users/index")
+slim(:"users/login")
 end
 
 def set_error(error_message)
@@ -34,7 +34,7 @@ post('/register') do
             password_digest = BCrypt::Password.create(password)
             p password_digest
             db.execute("INSERT INTO users(name, password) VALUES(?,?)", [username, password_digest])
-            redirect('/reg_confirm')
+            redirect('/home')
         else
             p 
             set_error("PASS DONT MATCH MAAN")
@@ -64,14 +64,14 @@ post('/login') do
     password = result1.first["password"]
     if BCrypt::Password.new(password)==password1
         session[:user_id] = user_id
-        redirect('/reg_confirm')
+        redirect('/home')
     else
         set_error("fel uppgifter bror")
         redirect('/error')
     end
 end
 
-get('/reg_confirm') do
+get('/home') do
     user_id = session[:user_id]
     db = SQLite3::Database.new("db/workouts.db")
     db.results_as_hash = true
@@ -88,7 +88,7 @@ get('/reg_confirm') do
     
     names= db.execute("SELECT * FROM program")
     p names
-    slim(:"workouts/index1",locals:{info:result, name:names})
+    slim(:"workouts/home",locals:{info:result, name:names})
 end
 
 get('/workouts/:id/show') do
@@ -179,7 +179,17 @@ p user_id
 end
 
 
-redirect('/reg_confirm')
+redirect('/home')
+end
+
+post('/update_name') do
+    db = SQLite3::Database.new("db/workouts.db")
+    db.results_as_hash = true
+    user_id = session[:user_id]
+    newname = params["new_username"]
+
+    db.execute("UPDATE users SET name = ? WHERE id = ?", newname, user_id)
+    redirect('/home')
 end
 
 post('/:id,:program_id/delete') do

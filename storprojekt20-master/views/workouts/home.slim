@@ -1,8 +1,7 @@
 a href="/create_move" lägg till övning
 
-a href="/add_cat" lägg till kategori
-
 a href="/create" skapa workout
+
 
 h2 = name
 
@@ -12,6 +11,10 @@ h1 Dina workouts
   h3  = el['name1']
   a href="/workouts/#{el['id']}/show" workout  
   
-    
+h1 change your username:
+form action="/update_name" method="post"
+    input type="text" placeholder="new_username" name="new_username"/
+    button type="submit" name="save" save
+
 
 
